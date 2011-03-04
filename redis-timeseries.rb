@@ -68,7 +68,7 @@ class RedisTimeSeries
         max = len-1
         while true
             p = min+((max-min)/2)
-            puts "Min: #{min} Max: #{max} P: #{p}"
+            # puts "Min: #{min} Max: #{max} P: #{p}"
             # Seek the first complete record starting from position 'p'.
             # We need to search for two consecutive \x00 chars, and enlarnge
             # the range if needed as we don't know how big the record is.
@@ -136,7 +136,7 @@ class RedisTimeSeries
         begin_off = seek(begin_time)
         end_off = seek(end_time)
         if begin_key == end_key
-            puts "#{begin_off} #{end_off} #{begin_key}"
+            # puts "#{begin_off} #{end_off} #{begin_key}"
             produce_result(res,begin_key,begin_off,end_off-1)
         else
             produce_result(res,begin_key,begin_off,-1)
