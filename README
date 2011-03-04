@@ -79,6 +79,7 @@ ADVANTAGES
 ==========
 
 - Very space efficient. Every timestep is stored inside a single Redis string so there is no overhead at all.
+- Very fast. Adding a data point consists of just a single O(1) operation.
 - It is designed to work with Redis Cluster (once released), and in general with different sharding policies: no multi keys op, nor big data structures into a single key. Even distributing the key across multiple instances using a simple hashing algorithm will work well.
 - Keys are already into a serialized format: it is trivial to move keys related to old time series into the file system or other big data systems, just using the Redis GET command, or to import back into Redis using SET.
 
