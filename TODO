@@ -1,2 +1,4 @@
+- Tests.
+- Once this is stable, create a gem.
 - Remember the latest range, and avoid querying Redis if the new range is included in the old one.
 - FIXME: include perfectly matching value in the end of the range.
