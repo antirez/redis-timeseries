@@ -74,7 +74,7 @@ of binary search that is able to check for delimiters and adapt the search
 accordingly. Range queries work correctly even when they spawn across multiple
 keys.
 
-The fetch_timestep record does not need any binary search, it is just a
+The fetch_timestep method does not need any binary search, it is just a
 single key lookup and is extremely fast.
 
 ADVANTAGES
