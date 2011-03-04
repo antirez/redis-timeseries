@@ -1,6 +1,4 @@
-require 'rubygems'
 require 'base64'
-require 'redis'
 
 class RedisTimeSeries
     def initialize(prefix,timestep,redis)
@@ -151,13 +149,11 @@ class RedisTimeSeries
         end
         res
     end
-end
 
-ts = RedisTimeSeries.new("test",3600*24,Redis.new)
-puts ts.fetch_range(1299142304.70,1299142311.3).inspect
-=begin
-(0..100).each{|i|
-    ts.add(i.to_s)
-    sleep 0.1
-}
-=end
+    def fetch_timestep(time)
+        res = []
+        key = getkey(time)
+        produce_result(res,key,0,-1)
+        res
+    end
+end
