@@ -57,7 +57,7 @@ HOW IT WORKS
 
 The library appends every data point as a string terminated by \x00 byte.
 Every field inside the data point is delimited by \x01 byte.
-If the data or metadata you add contains \x00 or \x11 characters, the library
+If the data or metadata you add contains \x00 or \x01 characters, the library
 will use base64 encoding to handle it transparently.
 
 So every key is a single string containing multiple \x00 separated data points
