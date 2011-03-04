@@ -10,9 +10,11 @@ There are many ways to store time series into Redis, for instance using Lists
 or Sorted Sets. This library takes a different approach storing time series
 into Redis strings using the Redis APPEND command.
 
-Basically a timestep is specified, that is an interval of time that will
-use the same key to store all the data points received. The timestep is
-specified when creating the time series object:
+A central concept in this library is the "timestep", that is an interval of
+time so that all the data points received in such an interval will be stored
+in the same key.
+
+The timestep is specified when creating the time series object:
     
     ts = RedisTimeSeries.new("test",3600,Redis.new)
 
