@@ -138,7 +138,7 @@ class RedisTimeSeries
             produce_result(res,begin_key,begin_off,end_off-1)
         else
             produce_result(res,begin_key,begin_off,-1)
-            t = normalize_time(t)
+            t = normalize_time(begin_time)
             while true
                 t += @timestep
                 key = getkey(t)

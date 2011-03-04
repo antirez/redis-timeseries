@@ -1,4 +1,2 @@
 - Remember the latest range, and avoid querying Redis if the new range is included in the old one.
-- Remember to document that changing time step is not a good idea.
-- API to fetch latest N time step items
 - FIXME: include perfectly matching value in the end of the range.
