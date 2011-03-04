@@ -9,9 +9,13 @@ class RedisTimeSeries
         @redis = redis
     end
 
+    def normalize_time(t)
+        t = t.to_i
+        t - (t % @timestep)
+    end
+
     def getkey(t)
-        t = t-(t % @timestep)
-        "ts:#{@prefix}:#{t}"
+        "ts:#{@prefix}:#{normalize_time t}"
     end
 
     def tsencode(data)
@@ -113,13 +117,44 @@ class RedisTimeSeries
             end
         end
     end
+
+    def produce_result(res,key,range_begin,range_end)
+        r = @redis.getrange(key,range_begin,range_end)
+        if r
+            s = r.split("\x00")
+            s.each{|r|
+                record = decode_record(r)
+                res << record
+            }
+        end
+    end
+
+    def fetch_range(begin_time,end_time)
+        res = []
+        begin_key = getkey(begin_time)
+        end_key = getkey(end_time)
+        begin_off = seek(begin_time)
+        end_off = seek(end_time)
+        if begin_key == end_key
+            puts "#{begin_off} #{end_off} #{begin_key}"
+            produce_result(res,begin_key,begin_off,end_off-1)
+        else
+            produce_result(res,begin_key,begin_off,-1)
+            t = normalize_time(t)
+            while true
+                t += @timestep
+                key = getkey(t)
+                break if key == end_key
+                produce_result(res,key,0,-1)
+            end
+            produce_result(res,end_key,0,end_off-1)
+        end
+        res
+    end
 end
 
 ts = RedisTimeSeries.new("test",3600*24,Redis.new)
-puts ts.seek(1299142304.70)
-puts ts.seek(1299142311.3)
-puts ts.seek(1299142301.2)
-puts ts.seek(1299142401.2)
+puts ts.fetch_range(1299142304.70,1299142311.3).inspect
 =begin
 (0..100).each{|i|
     ts.add(i.to_s)
