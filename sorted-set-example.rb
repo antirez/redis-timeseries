@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'redis'
-require './sorted-set'
+require './redis-timeseries-sorted-set'
 
 # To show the lib implementation here we use a timestep of just one second.
 # Then we sample every 0.1 seconds, producing on average 10 samples per key.
