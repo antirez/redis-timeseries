@@ -1,3 +1,7 @@
+# Copyright (C) 2010-2012 Salvatore Sanfilippo.
+# Licensed under the BSD two clause license, see the COPYING file shipped
+# with this source distribution for more information.
+
 require 'base64'
 
 class RedisTimeSeries
