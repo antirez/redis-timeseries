@@ -104,7 +104,7 @@ class RedisTimeSeries
                     break
                 end
                 # Already at the end of the string but still no luck?
-                return len+1 if range_end = len
+                return len+1 if range_end == len
                 # We need to enlrange the range, it is interesting to note
                 # that we take the enlarged value: likely other time series
                 # will be the same size on average.
